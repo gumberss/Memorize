@@ -29,9 +29,9 @@ class Deck extends Component {
     }
 }
 
-const mapStateToProps = (a, { id }) => {
+const mapStateToProps = ({ decks }, { id }) => {
     return {
-        deck: a
+        deck: decks[id]
     }
 }
 

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import TextBox from '../components/TextBox';
 import Texts from '../utils/Texts';
 import { green } from '../utils/colors';
+import { addDeck } from '../actions/decks';
+
 
 class DeckCreation extends Component {
 
@@ -11,8 +13,9 @@ class DeckCreation extends Component {
         text: ''
     }
 
-    createDeck = () => [
-    ]
+    createDeck = () => {
+        
+    }
 
     render() {
         return (
@@ -46,15 +49,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     }
 })
-// const mapStateToProps = state => ({});
-
-// const mapDispatchToProps = dispatch =>
-//   bindActionCreators(Actions, dispatch);
+const mapDispatchToProps = dispatch => {
+    return {
+        createDeck: deckName => dispatch(addDeck(deckName))
+    }
+}
 
 DeckCreation.route = 'DeckCreation'
 
 export default connect(
-    // mapStateToProps,
-    // mapDispatchToProps
+    undefined,
+    mapDispatchToProps
 )(DeckCreation);
 

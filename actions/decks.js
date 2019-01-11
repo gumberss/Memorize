@@ -1,7 +1,9 @@
-export const ADD_ENTRY = 'ADD_ENTRY'
-export const RECEIVE_ENTRIES = 'RECEIVE_ENTRIES'
+export const ADD_DECK = 'ADD_DECK'
+export const RECEIVE_DECKS = 'RECEIVE_DECKS'
 
-
-export function a (){
-
+export function addDeck(deckName) {
+    return {
+        type: ADD_DECK,
+        name: deckName
+    }
 }
