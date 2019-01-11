@@ -1,14 +1,15 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 import {
-    DrawerItems
-    , createAppContainer
-    , createDrawerNavigator
+    DrawerItems,
+    createAppContainer,
+    createDrawerNavigator,
+    createStackNavigator
 } from 'react-navigation'
 
 import Decks from '../views/Decks';
 
-const navigator = createDrawerNavigator({
+const drawerNavigator = createDrawerNavigator({
     home: {
         screen: Decks
     },
@@ -16,15 +17,26 @@ const navigator = createDrawerNavigator({
         screen: Decks
     },
 },
-{
-    contentComponent: props => (
-        <View>
-            <Text>Header</Text>
-            <DrawerItems {...props} />
-            <Text>Footer</Text>
-        </View>
-    )
-})
+    {
+        contentComponent: props => (
+            <View>
+                <Text>Header</Text>
+                <DrawerItems {...props} />
+                <Text>Footer</Text>
+            </View>
+        )
+    })
+
+const drawerContainer = createAppContainer(drawerNavigator)
+
+const stackNavigator = createStackNavigator({
+    Home: {
+      screen: drawerContainer,
+      navigationOptions: {
+        header: null,
+      },
+    }
+  })
 
 
-export default createAppContainer(navigator)
+export default createAppContainer(stackNavigator)
