@@ -8,13 +8,15 @@ import {
 } from 'react-navigation'
 
 import Decks from '../views/Decks';
+import DeckCreation from '../views/DeckCreation';
+
 
 const drawerNavigator = createDrawerNavigator({
     home: {
         screen: Decks
     },
-    paranaue: {
-        screen: Decks
+    [DeckCreation.route]: {
+        screen: DeckCreation
     },
 },
     {
