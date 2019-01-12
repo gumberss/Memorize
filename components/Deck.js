@@ -16,14 +16,11 @@ class Deck extends Component {
 
     render() {
 
-        const { decks } = this.props
+        const { deck } = this.props
 
         return (
             <View>
-                <FlatList
-                    data={decks}
-                    renderItem={this.renderDeck}
-                />
+                <Text>{deck.name}</Text>
             </View>
         );
     }

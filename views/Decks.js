@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { View, Text, StyleSheet, ActivityIndicator, TouchableOpacity } from 'react-native'
+import {
+  View,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+  TouchableOpacity,
+  FlatList
+} from 'react-native'
 import Icon from '../utils/Icons'
 import Texts from '../utils/Texts'
 import { blue, green, yellow } from '../utils/colors';
 import DeckCreation from './DeckCreation';
+import Deck from '../components/Deck';
 
 class Decks extends Component {
 
@@ -30,6 +38,10 @@ class Decks extends Component {
     )
   }
 
+  _keyExtractor = deckName => deckName
+
+  renderDeck = ({ item }) => (<Deck id={item} />)
+
   render() {
 
     const { decks } = this.props
@@ -44,7 +56,11 @@ class Decks extends Component {
 
     return (
       <View>
-
+        <FlatList
+          data={decks}
+          renderItem={this.renderDeck}
+          keyExtractor={this._keyExtractor}
+        />
       </View>
     );
   }
