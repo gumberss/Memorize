@@ -4,6 +4,11 @@ export const RECEIVE_DECKS = 'RECEIVE_DECKS'
 export function addDeck(deckName) {
     return {
         type: ADD_DECK,
-        name: deckName
+        deck: {
+            [deckName]: {
+                name: deckName
+            }
+        }
+
     }
 }

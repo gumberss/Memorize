@@ -7,13 +7,17 @@ import Decks from './views/Decks'
 
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import reducer from './reducers'
+import reducers from './reducers'
+
 import Navigator from './components/Navigator';
+import middlewares from './middlewares';
+
+const store = createStore(reducers, middlewares)
 
 export default class App extends React.Component {
   render() {
     return (
-      <Provider store={createStore(reducer)}>
+      <Provider store={store}>
         <View style={{ height: Constants.statusBarHeight }}>
           <StatusBar translucent />
         </View>

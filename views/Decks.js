@@ -61,13 +61,11 @@ styles = StyleSheet.create({
     backgroundColor: green,
     borderRadius: 8,
     marginTop: 8,
-
-
   }
 })
 
 const mapStateToProps = ({ decks }) => ({
-  decks
+  decks: Object.keys(decks)
 })
 
 export default connect(mapStateToProps)(Decks)
