@@ -13,6 +13,7 @@ import Icon from '../utils/Icons'
 import Texts from '../utils/Texts'
 import { blue, green, yellow } from '../utils/colors';
 import DeckCreation from './DeckCreation';
+import SingleDeck from './SingleDeck';
 import Deck from '../components/Deck';
 import { retrieveStore } from '../actions/store';
 import { STORE_DATA_KEY } from '../utils/store';
@@ -24,8 +25,8 @@ class Decks extends Component {
     const { retrieveStore } = this.props
 
     AsyncStorage.getItem(STORE_DATA_KEY)
-    .then(store => JSON.parse(store))
-    .then(store => retrieveStore(store))
+      .then(store => JSON.parse(store))
+      .then(store => retrieveStore(store))
 
   }
 
@@ -52,7 +53,18 @@ class Decks extends Component {
 
   _keyExtractor = deckName => deckName
 
-  renderDeck = ({ item }) => (<Deck id={item} />)
+  renderDeck = ({ item }) => (
+    <Deck
+      id={item}
+      onPress={() => this.openDeck(item)}
+    />
+  )
+
+  openDeck = deckName => {
+    const { navigate } = this.props.navigation
+
+    navigate(SingleDeck.route, { deckName })
+  }
 
   render() {
 

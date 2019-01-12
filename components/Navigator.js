@@ -9,7 +9,7 @@ import {
 
 import Decks from '../views/Decks';
 import DeckCreation from '../views/DeckCreation';
-
+import SingleDeck from '../views/SingleDeck';
 
 const drawerNavigator = createDrawerNavigator({
     home: {
@@ -17,7 +17,7 @@ const drawerNavigator = createDrawerNavigator({
     },
     [DeckCreation.route]: {
         screen: DeckCreation
-    },
+    }
 },
     {
         contentComponent: props => (
@@ -37,8 +37,13 @@ const stackNavigator = createStackNavigator({
       navigationOptions: {
         header: null,
       },
+    },
+    [SingleDeck.route]: {
+        screen: SingleDeck,
+        navigationOptions:({ navigation }) =>  ({
+            title: `${navigation.state.params.deckName}`
+        })
     }
   })
-
 
 export default createAppContainer(stackNavigator)
