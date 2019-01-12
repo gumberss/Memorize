@@ -5,19 +5,15 @@ import { Constants } from 'expo'
 import Card from './components/Card'
 import Decks from './views/Decks'
 
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import reducers from './reducers'
-
 import Navigator from './components/Navigator';
-import middlewares from './middlewares';
 
-const store = createStore(reducers, middlewares)
+import createStore from './utils/store'
 
 export default class App extends React.Component {
   render() {
     return (
-      <Provider store={store}>
+      <Provider store={createStore()}>
         <View style={{ height: Constants.statusBarHeight }}>
           <StatusBar translucent />
         </View>

@@ -6,7 +6,6 @@ import Texts from '../utils/Texts';
 import { green } from '../utils/colors';
 import { addDeck } from '../actions/decks';
 
-
 class DeckCreation extends Component {
 
     state = {

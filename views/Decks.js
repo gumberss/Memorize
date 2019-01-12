@@ -6,16 +6,28 @@ import {
   StyleSheet,
   ActivityIndicator,
   TouchableOpacity,
-  FlatList
+  FlatList,
+  AsyncStorage
 } from 'react-native'
 import Icon from '../utils/Icons'
 import Texts from '../utils/Texts'
 import { blue, green, yellow } from '../utils/colors';
 import DeckCreation from './DeckCreation';
 import Deck from '../components/Deck';
+import { retrieveStore } from '../actions/store';
+import { STORE_DATA_KEY } from '../utils/store';
 
 class Decks extends Component {
 
+  componentDidMount() {
+
+    const { retrieveStore } = this.props
+
+    AsyncStorage.getItem(STORE_DATA_KEY)
+    .then(store => JSON.parse(store))
+    .then(store => retrieveStore(store))
+
+  }
 
   createNewDeckNavigation = () => {
     const { navigate } = this.props.navigation
@@ -84,4 +96,8 @@ const mapStateToProps = ({ decks }) => ({
   decks: Object.keys(decks)
 })
 
-export default connect(mapStateToProps)(Decks)
+const mapDispatchToProps = dispatch => ({
+  retrieveStore: store => dispatch(retrieveStore(store))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Decks)

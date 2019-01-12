@@ -1,4 +1,5 @@
 import { ADD_DECK, RECEIVE_DECKS } from '../actions/decks'
+import { RETRIEVE_STORE } from '../actions/store'
 
 export default function decks(state = {}, action) {
     switch (action.type) {
@@ -11,6 +12,11 @@ export default function decks(state = {}, action) {
             return {
                 ...state,
                 ...action.decks
+            }
+        case RETRIEVE_STORE:
+            return {
+                ...state,
+                ...action.store.decks
             }
         default:
             return state
