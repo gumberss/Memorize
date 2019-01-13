@@ -20,10 +20,18 @@ class Card extends Component {
         }))
     }
 
-    renderCardData = text => (
+    componentWillReceiveProps(){
+        this.setState({
+            showAnswer: false
+        })
+    }
+
+    renderCardData = (text, { style, ...props }) => (
+
         <TouchableOpacity
-            style={styles.container}
+            style={[styles.container, style]}
             onPress={this.onFlip}
+            {...props}
         >
             <Text style={styles.text}>{text}</Text>
         </TouchableOpacity>
@@ -31,12 +39,12 @@ class Card extends Component {
 
     render() {
 
-        const { card } = this.props
+        const { card, ...props } = this.props
         const { showAnswer } = this.state
 
         return showAnswer 
-            ? this.renderCardData(card.answer)
-            : this.renderCardData(card.question)
+            ? this.renderCardData(card.answer, props)
+            : this.renderCardData(card.question, props)
     }
 }
 

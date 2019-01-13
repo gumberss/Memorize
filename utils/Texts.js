@@ -11,5 +11,7 @@ export default {
     ADD_CARD_BACK_TEXT: 'Qual é a melhor resposta para a pergunta?',
     ADD_CARD_REGISTER_BUTTON_TEXT: 'Registrar cartão',
     CARDS: 'Cartões',
-    CARD: 'Cartão'
+    CARD: 'Cartão',
+    GOT_ANSWER_CORRECT: 'Acertei',
+    GOT_ANSWER_WRONG: 'Errei',   
 }
