@@ -3,15 +3,13 @@ import { TouchableOpacity, StyleSheet } from 'react-native'
 import { gray } from '../utils/colors';
 
 
-export default function Btn({ children,  style, ...props }) {
+export default function Btn({ children, style, ...props }) {
     return (
-        <TouchableOpacity style={[styles.button, style]}>
+        <TouchableOpacity style={[styles.button, style]} {...props}>
             {children}
         </TouchableOpacity>
     )
 }
-
-
 
 const styles = StyleSheet.create({
     button: {

@@ -18,7 +18,6 @@ export default class TextBox extends Component {
     }
 }
 
-
 const styles = StyleSheet.create({
     textBox: {
         display: 'flex',
@@ -30,6 +29,6 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         borderColor: gray,
         borderWidth: 1,
-        borderRadius: 8,
+        borderRadius: 4,
     }
 })

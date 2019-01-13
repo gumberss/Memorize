@@ -10,6 +10,8 @@ import {
 import Decks from '../views/Decks';
 import DeckCreation from '../views/DeckCreation';
 import SingleDeck from '../views/SingleDeck';
+import CardCreator from '../views/CardCreator';
+import Texts from '../utils/Texts';
 
 const drawerNavigator = createDrawerNavigator({
     home: {
@@ -33,17 +35,23 @@ const drawerContainer = createAppContainer(drawerNavigator)
 
 const stackNavigator = createStackNavigator({
     Home: {
-      screen: drawerContainer,
-      navigationOptions: {
-        header: null,
-      },
+        screen: drawerContainer,
+        navigationOptions: {
+            header: null,
+        },
     },
     [SingleDeck.route]: {
         screen: SingleDeck,
-        navigationOptions:({ navigation }) =>  ({
+        navigationOptions: ({ navigation }) => ({
+            title: `${navigation.state.params.deckName}`
+        })
+    },
+    [CardCreator.route]: {
+        screen: CardCreator,
+        navigationOptions: ({ navigation }) => ({
             title: `${navigation.state.params.deckName}`
         })
     }
-  })
+})
 
 export default createAppContainer(stackNavigator)

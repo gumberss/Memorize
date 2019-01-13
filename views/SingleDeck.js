@@ -4,15 +4,22 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { gray, green, blue } from '../utils/colors'
 import Texts from '../utils/Texts'
 import Btn from '../components/Btn';
+import CardCreator from './CardCreator';
 
 class SingleDeck extends Component {
 
     addCard = () => {
-        //redirect
+
+        const { navigation, deck } = this.props
+        
+        navigation.navigate(CardCreator.route, { deckName: deck.name })
     }
 
     startQuiz = () => {
-        //redirect
+        
+        const { navigation,  } = this.props
+        
+        //navigate(CardCreator.route, {  })
     }
 
     render() {
