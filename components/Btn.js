@@ -14,7 +14,6 @@ export default function Btn({ children, style, ...props }) {
 const styles = StyleSheet.create({
     button: {
         height: 50,
-        width: '80%',
         borderWidth: 2,
         borderRadius: 4,
         borderColor: gray,
