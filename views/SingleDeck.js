@@ -5,6 +5,7 @@ import { gray, green, blue } from '../utils/colors'
 import Texts from '../utils/Texts'
 import Btn from '../components/Btn';
 import CardCreator from './CardCreator';
+import Quiz from './Quiz';
 
 class SingleDeck extends Component {
 
@@ -17,9 +18,9 @@ class SingleDeck extends Component {
 
     startQuiz = () => {
 
-        const { navigation, } = this.props
+        const { navigation, deck } = this.props
 
-        //navigate(CardCreator.route, {  })
+        navigation.navigate(Quiz.route, { deckName: deck.name })
     }
 
     render() {

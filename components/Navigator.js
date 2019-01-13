@@ -12,6 +12,7 @@ import DeckCreation from '../views/DeckCreation';
 import SingleDeck from '../views/SingleDeck';
 import CardCreator from '../views/CardCreator';
 import Texts from '../utils/Texts';
+import Quiz from '../views/Quiz';
 
 const drawerNavigator = createDrawerNavigator({
     home: {
@@ -48,6 +49,12 @@ const stackNavigator = createStackNavigator({
     },
     [CardCreator.route]: {
         screen: CardCreator,
+        navigationOptions: ({ navigation }) => ({
+            title: `${navigation.state.params.deckName}`
+        })
+    },
+    [Quiz.route]: {
+        screen: Quiz,
         navigationOptions: ({ navigation }) => ({
             title: `${navigation.state.params.deckName}`
         })
