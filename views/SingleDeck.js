@@ -36,19 +36,21 @@ class SingleDeck extends Component {
                         {cardCount > 1 ? Texts.CARDS : Texts.CARD}
                     </Text>
                 </View>
-                <Btn
-                    style={styles.addCardButton}
-                    onPress={this.addCard}
-                >
-                    <Text>{Texts.ADD_CARD}</Text>
-                </Btn>
+                <View style={styles.buttonsContainer}>
+                    <Btn
+                        style={styles.addCardButton}
+                        onPress={this.addCard}
+                    >
+                        <Text>{Texts.ADD_CARD}</Text>
+                    </Btn>
 
-                <Btn
-                    style={styles.startQuizButton}
-                    onPress={this.startQuiz}
-                >
-                    <Text>{Texts.START_QUIZ}</Text>
-                </Btn>
+                    <Btn
+                        style={styles.startQuizButton}
+                        onPress={this.startQuiz}
+                    >
+                        <Text>{Texts.START_QUIZ}</Text>
+                    </Btn>
+                </View>
 
             </View>
         )
@@ -67,6 +69,10 @@ const mapStateToProps = ({ decks, cards }, { navigation }) => {
 };
 
 const styles = StyleSheet.create({
+    buttonsContainer: {
+        width: '80%',
+        alignSelf: 'center'
+    },
     startQuizButton: {
         marginBottom: 30,
         borderColor: green
