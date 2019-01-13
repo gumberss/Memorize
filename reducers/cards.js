@@ -6,7 +6,7 @@ export default function cards(state = {}, action) {
         case REGISTER_CARD:
             return {
                 ...state,
-                [action.card.id]: {
+                [action.card._id]: {
                     ...action.card
                 }
             }

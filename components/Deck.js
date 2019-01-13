@@ -5,7 +5,6 @@ import Icon from '../utils/Icons'
 import { gray, lowGray } from '../utils/colors';
 import Texts from '../utils/Texts';
 
-//count of cards
 class Deck extends Component {
 
     render() {
