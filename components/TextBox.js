@@ -9,6 +9,7 @@ export default class TextBox extends Component {
         return (
             <View style={styles.container}>
                 <TextInput
+                    ref={(input) => this.input = input}
                     style={[styles.textBox, style]}
                     {...others}
                     multiline
@@ -16,6 +17,8 @@ export default class TextBox extends Component {
             </View>
         );
     }
+
+    focus = () => this.input.focus()
 }
 
 const styles = StyleSheet.create({

@@ -9,5 +9,7 @@ export default {
     ADD_CARD: 'Adicionar novo cartão',
     ADD_CARD_FRONT_TEXT: 'Qual é a pergunta que será feita?',
     ADD_CARD_BACK_TEXT: 'Qual é a melhor resposta para a pergunta?',
-    ADD_CARD_REGISTER_BUTTON_TEXT: 'Registrar cartão'
+    ADD_CARD_REGISTER_BUTTON_TEXT: 'Registrar cartão',
+    CARDS: 'Cartões',
+    CARD: 'Cartão'
 }

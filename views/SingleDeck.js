@@ -11,35 +11,38 @@ class SingleDeck extends Component {
     addCard = () => {
 
         const { navigation, deck } = this.props
-        
+
         navigation.navigate(CardCreator.route, { deckName: deck.name })
     }
 
     startQuiz = () => {
-        
-        const { navigation,  } = this.props
-        
+
+        const { navigation, } = this.props
+
         //navigate(CardCreator.route, {  })
     }
 
     render() {
 
-        const { deck } = this.props
+        const { deck, cardCount } = this.props
 
         return (
             <View style={styles.deckContainer}>
                 <View style={styles.deckContent}>
                     <Text style={styles.deckName} >{deck.name}</Text>
-                    <Text style={styles.deckCardCount}>cards count</Text>
+                    <Text style={styles.deckCardCount}>
+                        {`${cardCount} `}
+                        {cardCount > 1 ? Texts.CARDS : Texts.CARD}
+                    </Text>
                 </View>
-                <Btn 
+                <Btn
                     style={styles.addCardButton}
                     onPress={this.addCard}
                 >
                     <Text>{Texts.ADD_CARD}</Text>
                 </Btn>
 
-                <Btn 
+                <Btn
                     style={styles.startQuizButton}
                     onPress={this.startQuiz}
                 >
@@ -51,12 +54,14 @@ class SingleDeck extends Component {
     }
 }
 
-const mapStateToProps = ({ decks }, { navigation }) => {
+const mapStateToProps = ({ decks, cards }, { navigation }) => {
 
     const { deckName } = navigation.state.params
 
     return {
-        deck: decks[deckName]
+        deck: decks[deckName],
+        cardCount: Object.keys(cards)
+            .filter(cardId => cards[cardId].deckName === deckName).length
     }
 };
 
