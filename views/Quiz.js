@@ -149,7 +149,7 @@ class Quiz extends Component {
 
                 {showFlipCardMessage && (
                     <Text style={{ alignSelf: 'center' }}>
-                        Clique no cartão para virar o cartão
+                        {Texts.CLICK_IN_CARD_TO_FLIP}
                     </Text>
                 )}
                 {showButtons && (

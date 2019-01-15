@@ -21,5 +21,6 @@ export default {
     GOT_WRONG_ANSWER_COUNT: 'Você errou: ',
     AGAIN: 'Mais uma vez',
     CARD: 'cartão',
-    CARDS: 'cartões'
+    CARDS: 'cartões',
+    CLICK_IN_CARD_TO_FLIP: 'Clique no cartão para virar o cartão'
 }
