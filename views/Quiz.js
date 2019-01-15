@@ -88,13 +88,21 @@ class Quiz extends Component {
                                 : Texts.QUIZ_CAN_BE_BETTER
                     }
                 </Text>
+                <Text>
+                    {Texts.GOT_CORRECT_ANSWER_COUNT}
+                    {correctPercent}%
+                </Text>
                 <Text style={styles.correctAnswers}>
                     {Texts.GOT_CORRECT_ANSWER_COUNT}
                     {correctAnswerCount}
+                    {' '}
+                    {correctAnswerCount === 1 ? Texts.CARD : Texts.CARDS}
                 </Text>
                 <Text style={styles.wrongAnswers}>
                     {Texts.GOT_WRONG_ANSWER_COUNT}
                     {wrongAnswerCont}
+                    {' '}
+                    {wrongAnswerCont === 1 ? Texts.CARD : Texts.CARDS}
                 </Text>
 
                 <Btn
