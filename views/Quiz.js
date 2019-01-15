@@ -12,7 +12,9 @@ class Quiz extends Component {
     state = {
         currentCard: 0,
         showButtons: false,
-        finishCards: false
+        finishCards: false,
+        correctAnswerCount: 0,
+        wrongAnswerCont: 0
     }
 
     onFlipCard = showAnswer => {
@@ -22,15 +24,20 @@ class Quiz extends Component {
     }
 
     onCorrect = () => {
-        const { cardIds } = this.props
-        const { currentCard } = this.state
-
         this.setNextCard()
+
+        this.setState(oldState => ({
+            correctAnswerCount: ++oldState.correctAnswerCount
+        }))
     }
 
     onWrong = () => {
 
         this.setNextCard()
+
+        this.setState(oldState => ({
+            wrongAnswerCont: ++oldState.wrongAnswerCont
+        }))
     }
 
     setNextCard = () => {
@@ -43,18 +50,86 @@ class Quiz extends Component {
                 finishCards: true,
             })
         }
-        
+
         this.setState(oldState => ({
-            currentCard: ++oldState.currentCard
+            currentCard: ++oldState.currentCard,
+            showButtons: false
         }))
+    }
+
+    again = () => {
+        this.setState({
+            currentCard: 0,
+            showButtons: false,
+            finishCards: false,
+            correctAnswerCount: 0,
+            wrongAnswerCont: 0
+        })
+    }
+
+    renderFinishCards = () => {
+
+        const { correctAnswerCount, wrongAnswerCont } = this.state
+        const { cardIds } = this.props
+
+        const correctPercent = (100 * correctAnswerCount) / cardIds.length
+
+        return (
+            <View style={styles.endGameContainer}>
+                <Text style={[
+                    styles.endGameMessage,
+                    { color: correctPercent >= 70 ? green : correctPercent >= 50 ? blue : red }
+                ]}>
+                    {
+                        correctPercent >= 70
+                            ? Texts.EXCELENT
+                            : correctPercent >= 50
+                                ? Texts.NOT_BAD
+                                : Texts.QUIZ_CAN_BE_BETTER
+                    }
+                </Text>
+                <Text style={styles.correctAnswers}>
+                    {Texts.GOT_CORRECT_ANSWER_COUNT}
+                    {correctAnswerCount}
+                </Text>
+                <Text style={styles.wrongAnswers}>
+                    {Texts.GOT_WRONG_ANSWER_COUNT}
+                    {wrongAnswerCont}
+                </Text>
+
+                <Btn
+                    onPress={this.again}
+                    style={styles.againButton}
+                >
+                    <Text>{Texts.AGAIN}</Text>
+                </Btn>
+
+            </View>
+        )
     }
 
     render() {
         const { cardIds } = this.props
-        const { showButtons, currentCard } = this.state
-        
+        const {
+            showButtons,
+            currentCard,
+            finishCards,
+            correctAnswerCount,
+            wrongAnswerCont
+        } = this.state
+
+        if (finishCards)
+            return this.renderFinishCards()
+
         return (
             <View style={styles.container}>
+                <Text style={[
+                    styles.statusText,
+                    { color: correctAnswerCount >= wrongAnswerCont ? green : red }
+                ]}>
+                    {currentCard + 1} / {cardIds.length}
+                </Text>
+
                 <Card
                     id={cardIds[currentCard]}
                     whenFlip={this.onFlipCard}
@@ -82,6 +157,30 @@ class Quiz extends Component {
 }
 
 const styles = StyleSheet.create({
+    againButton: {
+        borderColor: blue,
+        marginTop: 10,
+        paddingLeft: 20,
+        paddingRight: 20
+
+    },
+    endGameMessage: {
+        fontSize: 28,
+        paddingBottom: 10
+    },
+    correctAnswers: {
+        fontSize: 16,
+        color: green
+    },
+    wrongAnswers: {
+        fontSize: 16,
+        color: red
+    },
+    endGameContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     container: {
         marginTop: 20,
         marginLeft: 20,
@@ -104,6 +203,10 @@ const styles = StyleSheet.create({
     },
     card: {
         borderColor: blue
+    },
+    statusText: {
+        fontSize: 16,
+        paddingBottom: 8
     }
 })
 

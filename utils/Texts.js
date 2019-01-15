@@ -5,7 +5,7 @@ export default {
     DECK_CREATOR_DECK_NAME: "Qual o nome do seu novo baralho?",
     LETS_GO_CREATE_DECK:"Vamos criar um baralho!",
     ALREADY_EXISTS_THIS_DECK_NAME:"Já existe um baralho com este nome",
-    START_QUIZ: 'Vamos nos divertir?',
+    START_QUIZ: 'Vamos estudar?',
     ADD_CARD: 'Adicionar novo cartão',
     ADD_CARD_FRONT_TEXT: 'Qual é a pergunta que será feita?',
     ADD_CARD_BACK_TEXT: 'Qual é a melhor resposta para a pergunta?',
@@ -13,5 +13,11 @@ export default {
     CARDS: 'Cartões',
     CARD: 'Cartão',
     GOT_ANSWER_CORRECT: 'Acertei',
-    GOT_ANSWER_WRONG: 'Errei',   
+    GOT_ANSWER_WRONG: 'Errei',  
+    EXCELENT: 'Excelente! que orgulho!!',
+    NOT_BAD: 'Nada mal jovem gafanhoto!',
+    QUIZ_CAN_BE_BETTER: 'Vamos estudar de novo? :)',
+    GOT_CORRECT_ANSWER_COUNT: 'Você acertou: ',
+    GOT_WRONG_ANSWER_COUNT: 'Você errou: ',
+    AGAIN: 'Mais uma vez'
 }
