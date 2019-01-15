@@ -14,12 +14,14 @@ class Quiz extends Component {
         showButtons: false,
         finishCards: false,
         correctAnswerCount: 0,
-        wrongAnswerCont: 0
+        wrongAnswerCont: 0,
+        showFlipCardMessage: true
     }
 
     onFlipCard = showAnswer => {
         this.setState({
-            showButtons: showAnswer
+            showButtons: showAnswer,
+            showFlipCardMessage: false
         })
     }
 
@@ -123,7 +125,8 @@ class Quiz extends Component {
             currentCard,
             finishCards,
             correctAnswerCount,
-            wrongAnswerCont
+            wrongAnswerCont,
+            showFlipCardMessage
         } = this.state
 
         if (finishCards)
@@ -143,6 +146,12 @@ class Quiz extends Component {
                     whenFlip={this.onFlipCard}
                     style={styles.card}
                 />
+
+                {showFlipCardMessage && (
+                    <Text style={{ alignSelf: 'center' }}>
+                        Clique no cartão para virar o cartão
+                    </Text>
+                )}
                 {showButtons && (
                     <View style={styles.buttonsContainer}>
                         <Btn
