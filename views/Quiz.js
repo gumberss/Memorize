@@ -8,6 +8,7 @@ import { red, green, blue } from '../utils/colors';
 import Texts from '../utils/Texts';
 import { NavigationActions } from 'react-navigation'
 import { finishQuiz } from '../actions/quiz';
+import { clearLocalNotification, setLocalNotification } from '../components/notification';
 
 class Quiz extends Component {
 
@@ -56,6 +57,9 @@ class Quiz extends Component {
             endQuiz({
                 deckName
             })
+
+            clearLocalNotification()
+            setLocalNotification()
 
             this.setState({
                 finishCards: true,
