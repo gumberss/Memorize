@@ -7,6 +7,7 @@ import Btn from '../components/Btn';
 import { red, green, blue } from '../utils/colors';
 import Texts from '../utils/Texts';
 import { NavigationActions } from 'react-navigation'
+import { finishQuiz } from '../actions/quiz';
 
 class Quiz extends Component {
 
@@ -27,28 +28,35 @@ class Quiz extends Component {
     }
 
     onCorrect = () => {
-        this.setNextCard()
-
+        
         this.setState(oldState => ({
             correctAnswerCount: ++oldState.correctAnswerCount
         }))
+
+        this.setNextCard()
     }
 
     onWrong = () => {
 
-        this.setNextCard()
-
+        
         this.setState(oldState => ({
             wrongAnswerCont: ++oldState.wrongAnswerCont
         }))
+
+        this.setNextCard()
     }
 
     setNextCard = () => {
 
-        const { cardIds } = this.props
+        const { cardIds, deckName, endQuiz } = this.props
         const { currentCard } = this.state
 
         if (currentCard + 1 === cardIds.length) {
+
+            endQuiz({
+                deckName
+            })
+
             this.setState({
                 finishCards: true,
             })
@@ -256,10 +264,15 @@ const mapStateToProps = ({ cards }, { navigation }) => {
         .filter(cardId => cards[cardId].deckName === deckName)
 
     return {
-        cardIds
+        cardIds,
+        deckName
     }
 }
 
+ const mapDispatchToProps = dispatch =>({
+     endQuiz: quiz => dispatch(finishQuiz(quiz))
+ })
+
 Quiz.route = "Quiz"
 
-export default connect(mapStateToProps)(Quiz)
+export default connect(mapStateToProps, mapDispatchToProps)(Quiz)
