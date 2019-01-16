@@ -22,5 +22,6 @@ export default {
     AGAIN: 'Mais uma vez',
     CARD: 'cartão',
     CARDS: 'cartões',
-    CLICK_IN_CARD_TO_FLIP: 'Clique no cartão para virar o cartão'
+    CLICK_IN_CARD_TO_FLIP: 'Clique no cartão para virar o cartão',
+    BACK_TO_DECK: 'Voltar ao baralho'
 }

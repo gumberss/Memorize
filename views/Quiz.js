@@ -6,6 +6,7 @@ import Card from '../components/Card';
 import Btn from '../components/Btn';
 import { red, green, blue } from '../utils/colors';
 import Texts from '../utils/Texts';
+import { NavigationActions } from 'react-navigation'
 
 class Quiz extends Component {
 
@@ -69,6 +70,10 @@ class Quiz extends Component {
         })
     }
 
+    backToDeck = () => {
+        this.props.navigation.dispatch(NavigationActions.back())
+    }
+
     renderFinishCards = () => {
 
         const { correctAnswerCount, wrongAnswerCont } = this.state
@@ -107,12 +112,21 @@ class Quiz extends Component {
                     {wrongAnswerCont === 1 ? Texts.CARD : Texts.CARDS}
                 </Text>
 
-                <Btn
-                    onPress={this.again}
-                    style={styles.againButton}
-                >
-                    <Text>{Texts.AGAIN}</Text>
-                </Btn>
+                <View style={styles.endGameContainerButtons}>
+                    <Btn
+                        onPress={this.backToDeck}
+                        style={styles.backToDeckButton}
+                    >
+                        <Text>{Texts.BACK_TO_DECK}</Text>
+                    </Btn>
+
+                    <Btn
+                        onPress={this.again}
+                        style={styles.againButton}
+                    >
+                        <Text>{Texts.AGAIN}</Text>
+                    </Btn>
+                </View>
 
             </View>
         )
@@ -174,12 +188,21 @@ class Quiz extends Component {
 }
 
 const styles = StyleSheet.create({
-    againButton: {
-        borderColor: blue,
+    endGameContainerButtons: {
         marginTop: 10,
+        flexDirection: 'row'
+    },
+    backToDeckButton: {
+        borderColor: blue,
+        marginRight: 8,
         paddingLeft: 20,
         paddingRight: 20
-
+    },
+    againButton: {
+        borderColor: blue,
+        marginLeft: 8,
+        paddingLeft: 20,
+        paddingRight: 20
     },
     endGameMessage: {
         fontSize: 28,
