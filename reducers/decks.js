@@ -1,5 +1,6 @@
-import { ADD_DECK, RECEIVE_DECKS } from '../actions/decks'
+import { ADD_DECK, RECEIVE_DECKS, DELETE_DECK } from '../actions/decks'
 import { RETRIEVE_STORE } from '../actions/store'
+import { stringify } from 'qs';
 
 export default function decks(state = {}, action) {
     switch (action.type) {
@@ -13,6 +14,19 @@ export default function decks(state = {}, action) {
                 ...state,
                 ...action.decks
             }
+        case DELETE_DECK: {
+
+            var a = Object.keys(state)
+                .filter(key => key !== action.deckName)
+                .reduce((final, current) => ({ ...final, [current]: {...state[current]} }), {})
+
+            alert(JSON.stringify( action.deckName))
+
+            return {
+                ...a
+
+            }
+        }
         case RETRIEVE_STORE:
             return {
                 ...state,
