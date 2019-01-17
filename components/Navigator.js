@@ -19,7 +19,7 @@ const drawerNavigator = createDrawerNavigator({
     home: {
         screen: Decks
     },
-    [DeckCreation.route]: {
+    DeckCreation: {
         screen: DeckCreation
     }
 },
