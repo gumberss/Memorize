@@ -27,5 +27,5 @@ export default {
     YOU_DONT_STUDIED_TODAY: 'Você não estudou hoje',
     HEY_LETS_STUDY_NOW: 'Heeey!! Vamos estudar agora?',
     QUIZ_RESULT_TITLE: 'Seu resultado',
-    FILL_ALL_INPUTS: 'Necessário o preenchimento de todos os campos'
+    FILL_ALL_INPUTS: 'Necessário o preenchimento de todos os campos',
 }

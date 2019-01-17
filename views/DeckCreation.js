@@ -3,18 +3,26 @@ import { connect } from 'react-redux';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import TextBox from '../components/TextBox';
 import Texts from '../utils/Texts';
-import { green } from '../utils/colors';
+import { green, red } from '../utils/colors';
 import { addDeck } from '../actions/decks';
 
 class DeckCreation extends Component {
 
     state = {
-        deckName: ''
+        deckName: '',
+        subimittedWithoutDeckName: false
     }
 
     createDeck = () => {
         const { deckName } = this.state
         const { createDeck, deckNames, goBack } = this.props
+
+        if (!deckName) {
+            this.setState({
+                subimittedWithoutDeckName: true
+            })
+            return
+        }
 
         !deckNames.includes(deckName)
             && createDeck(deckName)
@@ -24,13 +32,13 @@ class DeckCreation extends Component {
     render() {
 
         const { deckNames } = this.props
-        const { deckName } = this.state
+        const { deckName, subimittedWithoutDeckName } = this.state
 
         return (
             <View>
                 <Text style={styles.center}>{Texts.LETS_GO_CREATE_DECK}</Text>
                 <TextBox
-                    onChangeText={deckName => this.setState({ deckName })}
+                    onChangeText={deckName => this.setState({ deckName, subimittedWithoutDeckName: false })}
                     value={this.state.deckName}
                     placeholder={Texts.DECK_CREATOR_DECK_NAME}
                 />
@@ -43,7 +51,11 @@ class DeckCreation extends Component {
                 </TouchableOpacity>
 
                 {deckNames.includes(deckName) && (
-                    <Text style={styles.center}>{Texts.ALREADY_EXISTS_THIS_DECK_NAME}</Text>
+                    <Text style={[styles.center, styles.errorMessage]}>{Texts.ALREADY_EXISTS_THIS_DECK_NAME}</Text>
+                )}
+
+                {subimittedWithoutDeckName && (
+                    <Text style={[styles.center, styles.errorMessage]}>{Texts.FILL_ALL_INPUTS}</Text>
                 )}
             </View>
         )
@@ -63,6 +75,10 @@ const styles = StyleSheet.create({
         marginTop: 8,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    errorMessage: {
+        paddingTop: 10,
+        color: red
     }
 })
 
