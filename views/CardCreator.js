@@ -94,6 +94,4 @@ const mapDispatchToProps = dispatch => ({
     registerCard: card => dispatch(registerCard(card))
 })
 
-CardCreator.route = 'CardCreator'
-
 export default connect(undefined, mapDispatchToProps)(CardCreator)

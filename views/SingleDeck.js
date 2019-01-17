@@ -13,14 +13,14 @@ class SingleDeck extends Component {
 
         const { navigation, deck } = this.props
 
-        navigation.navigate(CardCreator.route, { deckName: deck.name })
+        navigation.navigate('CardCreator', { deckName: deck.name })
     }
 
     startQuiz = () => {
 
         const { navigation, deck } = this.props
 
-        navigation.navigate(Quiz.route, { deckName: deck.name })
+        navigation.navigate('Quiz', { deckName: deck.name })
     }
 
     render() {
@@ -97,8 +97,6 @@ const styles = StyleSheet.create({
         color: gray
     }
 })
-
-SingleDeck.route = 'SingleDeck'
 
 export default connect(
     mapStateToProps,

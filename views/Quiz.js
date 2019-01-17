@@ -15,9 +15,8 @@ class Quiz extends Component {
     state = {
         currentCard: 0,
         showButtons: false,
-        finishCards: false,
         correctAnswerCount: 0,
-        wrongAnswerCont: 0,
+        wrongAnswerCount: 0,
         showFlipCardMessage: true
     }
 
@@ -29,119 +28,62 @@ class Quiz extends Component {
     }
 
     onCorrect = () => {
-        
+
         this.setState(oldState => ({
             correctAnswerCount: ++oldState.correctAnswerCount
         }))
 
-        this.setNextCard()
+        this.setNextCard(true)
     }
 
     onWrong = () => {
 
-        
         this.setState(oldState => ({
-            wrongAnswerCont: ++oldState.wrongAnswerCont
+            wrongAnswerCount: ++oldState.wrongAnswerCount
         }))
 
-        this.setNextCard()
+        this.setNextCard(false)
     }
 
-    setNextCard = () => {
+    setNextCard = (correctAnswer) => {
 
         const { cardIds, deckName, endQuiz } = this.props
-        const { currentCard } = this.state
+        const { currentCard, correctAnswerCount, wrongAnswerCount } = this.state
 
         if (currentCard + 1 === cardIds.length) {
 
-            endQuiz({
-                deckName
-            })
+            endQuiz({ deckName })
 
             clearLocalNotification()
             setLocalNotification()
 
-            this.setState({
-                finishCards: true,
+            const { navigate } = this.props.navigation
+
+            navigate('QuizResult', {
+                deckName,
+                correctAnswerCount: correctAnswer && correctAnswerCount + 1 || correctAnswerCount,
+                wrongAnswerCount: !correctAnswer && wrongAnswerCount + 1 || wrongAnswerCount,
+                cardCount: cardIds.length
             })
+
+            this.setState({
+                currentCard: 0,
+                showButtons: false,
+                correctAnswerCount: 0,
+                wrongAnswerCount: 0
+            })
+        } else {
+
+            this.setState(oldState => ({
+                currentCard: ++oldState.currentCard,
+                showButtons: false
+            }))
         }
-
-        this.setState(oldState => ({
-            currentCard: ++oldState.currentCard,
-            showButtons: false
-        }))
     }
 
-    again = () => {
-        this.setState({
-            currentCard: 0,
-            showButtons: false,
-            finishCards: false,
-            correctAnswerCount: 0,
-            wrongAnswerCont: 0
-        })
-    }
 
     backToDeck = () => {
         this.props.navigation.dispatch(NavigationActions.back())
-    }
-
-    renderFinishCards = () => {
-
-        const { correctAnswerCount, wrongAnswerCont } = this.state
-        const { cardIds } = this.props
-
-        const correctPercent = (100 * correctAnswerCount) / cardIds.length
-
-        return (
-            <View style={styles.endGameContainer}>
-                <Text style={[
-                    styles.endGameMessage,
-                    { color: correctPercent >= 70 ? green : correctPercent >= 50 ? blue : red }
-                ]}>
-                    {
-                        correctPercent >= 70
-                            ? Texts.EXCELENT
-                            : correctPercent >= 50
-                                ? Texts.NOT_BAD
-                                : Texts.QUIZ_CAN_BE_BETTER
-                    }
-                </Text>
-                <Text>
-                    {Texts.GOT_CORRECT_ANSWER_COUNT}
-                    {correctPercent}%
-                </Text>
-                <Text style={styles.correctAnswers}>
-                    {Texts.GOT_CORRECT_ANSWER_COUNT}
-                    {correctAnswerCount}
-                    {' '}
-                    {correctAnswerCount === 1 ? Texts.CARD : Texts.CARDS}
-                </Text>
-                <Text style={styles.wrongAnswers}>
-                    {Texts.GOT_WRONG_ANSWER_COUNT}
-                    {wrongAnswerCont}
-                    {' '}
-                    {wrongAnswerCont === 1 ? Texts.CARD : Texts.CARDS}
-                </Text>
-
-                <View style={styles.endGameContainerButtons}>
-                    <Btn
-                        onPress={this.backToDeck}
-                        style={styles.backToDeckButton}
-                    >
-                        <Text>{Texts.BACK_TO_DECK}</Text>
-                    </Btn>
-
-                    <Btn
-                        onPress={this.again}
-                        style={styles.againButton}
-                    >
-                        <Text>{Texts.AGAIN}</Text>
-                    </Btn>
-                </View>
-
-            </View>
-        )
     }
 
     render() {
@@ -149,20 +91,16 @@ class Quiz extends Component {
         const {
             showButtons,
             currentCard,
-            finishCards,
             correctAnswerCount,
-            wrongAnswerCont,
+            wrongAnswerCount,
             showFlipCardMessage
         } = this.state
-
-        if (finishCards)
-            return this.renderFinishCards()
 
         return (
             <View style={styles.container}>
                 <Text style={[
                     styles.statusText,
-                    { color: correctAnswerCount >= wrongAnswerCont ? green : red }
+                    { color: correctAnswerCount >= wrongAnswerCount ? green : red }
                 ]}>
                     {currentCard + 1} / {cardIds.length}
                 </Text>
@@ -200,39 +138,7 @@ class Quiz extends Component {
 }
 
 const styles = StyleSheet.create({
-    endGameContainerButtons: {
-        marginTop: 10,
-        flexDirection: 'row'
-    },
-    backToDeckButton: {
-        borderColor: blue,
-        marginRight: 8,
-        paddingLeft: 20,
-        paddingRight: 20
-    },
-    againButton: {
-        borderColor: blue,
-        marginLeft: 8,
-        paddingLeft: 20,
-        paddingRight: 20
-    },
-    endGameMessage: {
-        fontSize: 28,
-        paddingBottom: 10
-    },
-    correctAnswers: {
-        fontSize: 16,
-        color: green
-    },
-    wrongAnswers: {
-        fontSize: 16,
-        color: red
-    },
-    endGameContainer: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
+
     container: {
         marginTop: 20,
         marginLeft: 20,
@@ -273,10 +179,8 @@ const mapStateToProps = ({ cards }, { navigation }) => {
     }
 }
 
- const mapDispatchToProps = dispatch =>({
-     endQuiz: quiz => dispatch(finishQuiz(quiz))
- })
-
-Quiz.route = "Quiz"
+const mapDispatchToProps = dispatch => ({
+    endQuiz: quiz => dispatch(finishQuiz(quiz))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Quiz)

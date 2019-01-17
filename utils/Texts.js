@@ -25,5 +25,6 @@ export default {
     CLICK_IN_CARD_TO_FLIP: 'Clique no cartão para virar o cartão',
     BACK_TO_DECK: 'Voltar ao baralho',
     YOU_DONT_STUDIED_TODAY: 'Você não estudou hoje',
-    HEY_LETS_STUDY_NOW: 'Heeey!! Vamos estudar agora?'
+    HEY_LETS_STUDY_NOW: 'Heeey!! Vamos estudar agora?',
+    QUIZ_RESULT_TITLE: 'Seu resultado'
 }

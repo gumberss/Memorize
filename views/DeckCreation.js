@@ -76,8 +76,6 @@ const mapDispatchToProps = (dispatch, { navigation }) => ({
 
 })
 
-DeckCreation.route = 'DeckCreation'
-
 export default connect(
     mapStateToProps,
     mapDispatchToProps

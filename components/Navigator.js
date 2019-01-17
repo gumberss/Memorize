@@ -11,8 +11,9 @@ import Decks from '../views/Decks';
 import DeckCreation from '../views/DeckCreation';
 import SingleDeck from '../views/SingleDeck';
 import CardCreator from '../views/CardCreator';
-import Texts from '../utils/Texts';
 import Quiz from '../views/Quiz';
+import Texts from '../utils/Texts';
+import QuizResult from '../views/QuizResult';
 
 const drawerNavigator = createDrawerNavigator({
     home: {
@@ -41,22 +42,28 @@ const stackNavigator = createStackNavigator({
             header: null,
         },
     },
-    [SingleDeck.route]: {
+    SingleDeck: {
         screen: SingleDeck,
         navigationOptions: ({ navigation }) => ({
             title: `${navigation.state.params.deckName}`
         })
     },
-    [CardCreator.route]: {
+    CardCreator: {
         screen: CardCreator,
         navigationOptions: ({ navigation }) => ({
             title: `${navigation.state.params.deckName}`
         })
     },
-    [Quiz.route]: {
+    Quiz: {
         screen: Quiz,
         navigationOptions: ({ navigation }) => ({
             title: `${navigation.state.params.deckName}`
+        })
+    },
+    QuizResult: {
+        screen: QuizResult,
+        navigationOptions: () => ({
+            title: Texts.QUIZ_RESULT_TITLE
         })
     }
 })

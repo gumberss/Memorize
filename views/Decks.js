@@ -11,9 +11,8 @@ import {
 } from 'react-native'
 import Icon from '../utils/Icons'
 import Texts from '../utils/Texts'
-import { blue, green, yellow } from '../utils/colors';
+import { green, yellow } from '../utils/colors';
 import DeckCreation from './DeckCreation';
-import SingleDeck from './SingleDeck';
 import Deck from '../components/Deck';
 import { retrieveStore } from '../actions/store';
 import { STORE_DATA_KEY } from '../utils/store';
@@ -63,7 +62,7 @@ class Decks extends Component {
   openDeck = deckName => {
     const { navigate } = this.props.navigation
 
-    navigate(SingleDeck.route, { deckName })
+    navigate('SingleDeck', { deckName })
   }
 
   render() {
