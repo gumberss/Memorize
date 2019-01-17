@@ -26,5 +26,6 @@ export default {
     BACK_TO_DECK: 'Voltar ao baralho',
     YOU_DONT_STUDIED_TODAY: 'Você não estudou hoje',
     HEY_LETS_STUDY_NOW: 'Heeey!! Vamos estudar agora?',
-    QUIZ_RESULT_TITLE: 'Seu resultado'
+    QUIZ_RESULT_TITLE: 'Seu resultado',
+    FILL_ALL_INPUTS: 'Necessário o preenchimento de todos os campos'
 }

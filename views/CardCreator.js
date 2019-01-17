@@ -3,6 +3,7 @@ import newId from 'uuid/v1'
 import { connect } from 'react-redux';
 import { View, Text, StyleSheet } from 'react-native'
 import Texts from '../utils/Texts';
+import { red } from '../utils/colors';
 import TextBox from '../components/TextBox';
 import Btn from '../components/Btn';
 import { blue } from '../utils/colors';
@@ -12,7 +13,8 @@ class CardCreator extends Component {
 
     state = {
         question: '',
-        answer: ''
+        answer: '',
+        submittedWithError: false
     }
 
     onRegisterCard = () => {
@@ -20,6 +22,11 @@ class CardCreator extends Component {
         const { answer, question } = this.state
         const { registerCard, navigation } = this.props
         const deckName = navigation.state.params.deckName
+
+        if (!question || !answer) {
+            this.setState({ submittedWithError: true })
+            return
+        }
 
         registerCard({
             _id: newId(),
@@ -30,7 +37,8 @@ class CardCreator extends Component {
 
         this.setState({
             question: '',
-            answer: ''
+            answer: '',
+            submittedWithError: false
         })
 
         this.questionInput && this.questionInput.focus()
@@ -38,7 +46,7 @@ class CardCreator extends Component {
 
     render() {
 
-        const { answer, question } = this.state
+        const { answer, question, submittedWithError } = this.state
 
         return (
             <View style={styles.container}>
@@ -47,14 +55,14 @@ class CardCreator extends Component {
                 >{Texts.ADD_CARD_FRONT_TEXT}</Text>
                 <TextBox
                     ref={(input) => this.questionInput = input}
-                    onChangeText={question => this.setState({ question })}
+                    onChangeText={question => this.setState({ question, submittedWithError: false })}
                     value={question}
                 />
                 <Text
                     style={styles.texts}
                 >{Texts.ADD_CARD_BACK_TEXT}</Text>
                 <TextBox
-                    onChangeText={answer => this.setState({ answer })}
+                    onChangeText={answer => this.setState({ answer, submittedWithError: false })}
                     value={answer}
                 />
 
@@ -64,6 +72,12 @@ class CardCreator extends Component {
                 >
                     <Text>{Texts.ADD_CARD_REGISTER_BUTTON_TEXT}</Text>
                 </Btn>
+
+                {
+                    submittedWithError && (
+                        <Text style={styles.errorMessage}>{Texts.FILL_ALL_INPUTS}</Text>
+                    )
+                }
             </View>
         );
     }
@@ -86,9 +100,12 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         borderColor: blue,
         width: '100%'
+    },
+    errorMessage: {
+        paddingTop: 10,
+        color: red
     }
 })
-
 
 const mapDispatchToProps = dispatch => ({
     registerCard: card => dispatch(registerCard(card))
