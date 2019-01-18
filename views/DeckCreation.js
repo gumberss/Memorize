@@ -35,7 +35,7 @@ class DeckCreation extends Component {
         const { deckName, subimittedWithoutDeckName } = this.state
 
         return (
-            <View>
+            <View style={styles.container}>
                 <Text style={styles.center}>{Texts.LETS_GO_CREATE_DECK}</Text>
                 <TextBox
                     onChangeText={deckName => this.setState({ deckName, subimittedWithoutDeckName: false })}
@@ -63,6 +63,9 @@ class DeckCreation extends Component {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        marginTop: 20
+    },
     center: {
         display: 'flex',
         alignSelf: 'center',

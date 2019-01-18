@@ -16,15 +16,12 @@ export default function decks(state = {}, action) {
             }
         case DELETE_DECK: {
 
-            var a = Object.keys(state)
+            var newStateItems = Object.keys(state)
                 .filter(key => key !== action.deckName)
                 .reduce((final, current) => ({ ...final, [current]: {...state[current]} }), {})
 
-            alert(JSON.stringify( action.deckName))
-
             return {
-                ...a
-
+                ...newStateItems
             }
         }
         case RETRIEVE_STORE:
