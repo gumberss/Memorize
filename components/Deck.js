@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import Icon from '../utils/Icons'
-import { gray, lowGray } from '../utils/colors';
+import { gray, lowGray, red } from '../utils/colors';
 import Texts from '../utils/Texts';
 import { deleteDeck } from '../actions/decks';
 
@@ -33,6 +33,7 @@ class Deck extends Component {
                     <Icon
                         name="trash"
                         size={24}
+                        color={red}
                     />
                 </TouchableOpacity>
             </View>

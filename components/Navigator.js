@@ -1,10 +1,10 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { Platform } from 'react-native'
 import {
-    DrawerItems,
     createAppContainer,
-    createDrawerNavigator,
-    createStackNavigator
+    createStackNavigator,
+    createBottomTabNavigator,
+    createMaterialTopTabNavigator
 } from 'react-navigation'
 
 import Decks from '../views/Decks';
@@ -14,30 +14,55 @@ import CardCreator from '../views/CardCreator';
 import Quiz from '../views/Quiz';
 import Texts from '../utils/Texts';
 import QuizResult from '../views/QuizResult';
+import { purple, white } from '../utils/colors';
 
-const drawerNavigator = createDrawerNavigator({
+const routeConfigs = {
     home: {
-        screen: Decks
+        screen: Decks,
+        navigationOptions: {
+            tabBarLabel: "Baralhos",
+        }
     },
     DeckCreation: {
-        screen: DeckCreation
+        screen: DeckCreation,
+        navigationOptions: {
+            tabBarLabel: "Criar baralho"
+        }
     }
-},
-    {
-        contentComponent: props => (
-            <View>
-                <Text>Header</Text>
-                <DrawerItems {...props} />
-                <Text>Footer</Text>
-            </View>
-        )
-    })
+}
 
-const drawerContainer = createAppContainer(drawerNavigator)
+const tabNavigatorConfig = {
+    navigationOptions: {
+        header: null
+    },
+    tabBarOptions: {
+        activeTintColor: Platform.OS === "ios" ? purple : white,
+        style: {
+            height: 56,
+            backgroundColor: Platform.OS === "ios" ? white : purple,
+            shadowColor: "rgba(0, 0, 0, 0.24)",
+            backgroundColor: 'rgb(64,172,136)',
+            shadowOffset: {
+                width: 0,
+                height: 3
+            },
+            shadowRadius: 6,
+            shadowOpacity: 1
+        }
+    }
+};
+
+
+const Tabs =
+    Platform.OS === "ios"
+        ? createBottomTabNavigator(routeConfigs, tabNavigatorConfig)
+        : createMaterialTopTabNavigator(routeConfigs, tabNavigatorConfig);
+
+const tabsContainer = createAppContainer(Tabs)
 
 const stackNavigator = createStackNavigator({
     Home: {
-        screen: drawerContainer,
+        screen: tabsContainer,
         navigationOptions: {
             header: null,
         },
