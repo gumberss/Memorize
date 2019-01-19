@@ -28,4 +28,7 @@ export default {
     HEY_LETS_STUDY_NOW: 'Heeey!! Vamos estudar agora?',
     QUIZ_RESULT_TITLE: 'Seu resultado',
     FILL_ALL_INPUTS: 'Necessário o preenchimento de todos os campos',
+    THERE_IS_NO_CARD_REGISTERED: 'Não há cartão cadastrado',
+    OPS: 'Ops!!',
+    I_UNDERSTAND: 'Entendi :)'
 }

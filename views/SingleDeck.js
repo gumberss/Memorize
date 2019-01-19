@@ -4,10 +4,20 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { gray, green, blue } from '../utils/colors'
 import Texts from '../utils/Texts'
 import Btn from '../components/Btn';
-import CardCreator from './CardCreator';
-import Quiz from './Quiz';
+
+import AwesomeAlert from 'react-native-awesome-alerts'
 
 class SingleDeck extends Component {
+
+    state = {
+        showAlert: false
+    }
+
+    hideAlert = () => {
+        this.setState({
+            showAlert: false
+        })
+    }
 
     addCard = () => {
 
@@ -18,13 +28,22 @@ class SingleDeck extends Component {
 
     startQuiz = () => {
 
-        const { navigation, deck } = this.props
+        const { navigation, deck, cardCount } = this.props
+
+        if (!cardCount) {
+            this.setState({
+                showAlert: true
+            })
+
+            return
+        }
 
         navigation.navigate('Quiz', { deckName: deck.name })
     }
 
     render() {
 
+        const { showAlert } = this.state 
         const { deck, cardCount } = this.props
 
         return (
@@ -52,6 +71,17 @@ class SingleDeck extends Component {
                     </Btn>
                 </View>
 
+                <AwesomeAlert
+                    show={showAlert}
+                    title={Texts.OPS}
+                    message={Texts.THERE_IS_NO_CARD_REGISTERED}
+                    closeOnTouchOutside={true}
+                    closeOnHardwareBackPress={true}
+                    showConfirmButton={true}
+                    confirmText={Texts.I_UNDERSTAND}
+                    confirmButtonColor="#DD6B55"
+                    onConfirmPressed={this.hideAlert}
+                />
             </View>
         )
     }

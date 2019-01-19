@@ -25,7 +25,7 @@ class Deck extends Component {
                         <Text style={styles.deckName}>{deck.name}</Text>
                         <Text style={styles.deckCardCount}>
                             {`${cardCount} `}
-                            {cardCount > 1 ? Texts.CARDS : Texts.CARD}
+                            {cardCount === 1 ? Texts.CARD : Texts.CARDS}
                         </Text>
                     </View>
                 </TouchableOpacity>
