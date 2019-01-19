@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import TextBox from '../components/TextBox';
 import Texts from '../utils/Texts';
-import { green, red } from '../utils/colors';
+import { green, red, white } from '../utils/colors';
 import { addDeck } from '../actions/decks';
+import Icon from '../utils/Icons'
+import Btn from '../components/Btn';
 
 class DeckCreation extends Component {
 
@@ -43,12 +45,20 @@ class DeckCreation extends Component {
                     placeholder={Texts.DECK_CREATOR_DECK_NAME}
                 />
 
-                <TouchableOpacity
-                    style={styles.createDeckButton}
+                <Btn
                     onPress={this.createDeck}
+                    style={styles.createDeckButton}
                 >
-                    <Text>{Texts.CREATE_DECK}</Text>
-                </TouchableOpacity>
+                    <View style={styles.buttonContent}>
+                        <Icon
+                            name="add"
+                            size={20}
+                            style={styles.createIcon}
+                        />
+                        <Text>{Texts.CREATE_DECK}</Text>
+                    </View>
+
+                </Btn>
 
                 {deckNames.includes(deckName) && (
                     <Text style={[styles.center, styles.errorMessage]}>{Texts.ALREADY_EXISTS_THIS_DECK_NAME}</Text>
@@ -63,8 +73,14 @@ class DeckCreation extends Component {
 }
 
 const styles = StyleSheet.create({
+    createIcon: {
+        marginRight: 20
+    },
     container: {
         marginTop: 20
+    },
+    buttonContent: {
+        flexDirection: 'row',
     },
     center: {
         display: 'flex',
@@ -73,7 +89,7 @@ const styles = StyleSheet.create({
     },
     createDeckButton: {
         padding: 15,
-        backgroundColor: green,
+        borderColor: green,
         borderRadius: 8,
         marginTop: 8,
         alignItems: 'center',
