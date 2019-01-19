@@ -64,7 +64,7 @@ class SingleDeck extends Component {
                         <Icon
                             name="copy"
                             size={20}
-                            style={styles.createIcon}
+                            style={styles.icon}
                             color={blue}
                         />
                         <Text>{Texts.ADD_CARD}</Text>
@@ -77,7 +77,7 @@ class SingleDeck extends Component {
                         <Icon
                             name="play"
                             size={20}
-                            style={styles.createIcon}
+                            style={styles.icon}
                             color={green}
                         />
                         <Text>{Texts.START_QUIZ}</Text>
@@ -101,7 +101,7 @@ class SingleDeck extends Component {
 }
 
 const styles = StyleSheet.create({
-    createIcon: {
+    icon: {
         marginRight: 20
     },
     buttonsContainer: {

@@ -9,6 +9,7 @@ import Texts from '../utils/Texts';
 import { NavigationActions } from 'react-navigation'
 import { finishQuiz } from '../actions/quiz';
 import { clearLocalNotification, setLocalNotification } from '../components/notification';
+import Icon from '../utils/Icons';
 
 class Quiz extends Component {
 
@@ -122,12 +123,25 @@ class Quiz extends Component {
                             style={[styles.button, styles.correctButton]}
                             onPress={this.onCorrect}
                         >
+                            <Icon
+                                name="checkmark"
+                                size={20}
+                                style={styles.icon}
+                                color={green}
+                            />
+
                             <Text>{Texts.GOT_ANSWER_CORRECT}</Text>
                         </Btn>
                         <Btn
                             style={[styles.button, styles.wrongButton]}
                             onPress={this.onWrong}
                         >
+                            <Icon
+                                name="close"
+                                size={20}
+                                style={styles.icon}
+                                color={red}
+                            />
                             <Text>{Texts.GOT_ANSWER_WRONG}</Text>
                         </Btn>
                     </View>)
@@ -138,7 +152,9 @@ class Quiz extends Component {
 }
 
 const styles = StyleSheet.create({
-
+    icon: {
+        marginRight: 20
+    },
     container: {
         marginTop: 20,
         marginLeft: 20,

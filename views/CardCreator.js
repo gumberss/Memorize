@@ -8,6 +8,7 @@ import TextBox from '../components/TextBox';
 import Btn from '../components/Btn';
 import { blue } from '../utils/colors';
 import { registerCard } from '../actions/card';
+import Icon from '../utils/Icons';
 
 class CardCreator extends Component {
 
@@ -70,6 +71,13 @@ class CardCreator extends Component {
                     style={styles.registerButton}
                     onPress={this.onRegisterCard}
                 >
+                    <Icon
+                        name="add"
+                        size={20}
+                        style={styles.icon}
+                        color={blue}
+                    />
+
                     <Text>{Texts.ADD_CARD_REGISTER_BUTTON_TEXT}</Text>
                 </Btn>
 
@@ -84,6 +92,9 @@ class CardCreator extends Component {
 }
 
 const styles = StyleSheet.create({
+    icon: {
+        marginRight: 20
+    },
     container: {
         display: 'flex',
         flex: 1,

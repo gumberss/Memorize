@@ -6,6 +6,7 @@ import { gray } from '../utils/colors';
 export default function Btn({ children, style, ...props }) {
     return (
         <TouchableOpacity style={[styles.button, style]} {...props}>
+        
             {children}
         </TouchableOpacity>
     )

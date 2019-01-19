@@ -6,7 +6,7 @@ import Btn from '../components/Btn';
 import { red, green, blue } from '../utils/colors';
 import Texts from '../utils/Texts';
 import { NavigationActions } from 'react-navigation'
-import SingleDeck from './SingleDeck';
+import Icon from '../utils/Icons';
 
 class QuizResult extends Component {
 
@@ -41,7 +41,7 @@ class QuizResult extends Component {
                 </Text>
                 <Text>
                     {Texts.GOT_CORRECT_ANSWER_COUNT}
-                    {correctPercent}%
+                    {Number(correctPercent).toFixed(2)}%
             </Text>
                 <Text style={styles.correctAnswers}>
                     {Texts.GOT_CORRECT_ANSWER_COUNT}
@@ -61,6 +61,12 @@ class QuizResult extends Component {
                         onPress={this.backToDeck}
                         style={styles.backToDeckButton}
                     >
+                        <Icon
+                            name="arrow-round-back"
+                            size={20}
+                            style={styles.icon}
+                            color={blue}
+                        />
                         <Text>{Texts.BACK_TO_DECK}</Text>
                     </Btn>
 
@@ -68,6 +74,12 @@ class QuizResult extends Component {
                         onPress={this.again}
                         style={styles.againButton}
                     >
+                        <Icon
+                            name="play"
+                            size={20}
+                            style={styles.icon}
+                            color={blue}
+                        />
                         <Text>{Texts.AGAIN}</Text>
                     </Btn>
                 </View>
@@ -80,6 +92,9 @@ class QuizResult extends Component {
 
 
 const styles = StyleSheet.create({
+    icon: {
+        marginRight: 10
+    },
     endGameContainerButtons: {
         marginTop: 10,
         flexDirection: 'row'
