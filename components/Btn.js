@@ -19,6 +19,8 @@ const styles = StyleSheet.create({
         borderColor: gray,
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        flexDirection: 'row'
+
     },
 })

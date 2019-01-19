@@ -49,14 +49,13 @@ class DeckCreation extends Component {
                     onPress={this.createDeck}
                     style={styles.createDeckButton}
                 >
-                    <View style={styles.buttonContent}>
-                        <Icon
-                            name="add"
-                            size={20}
-                            style={styles.createIcon}
-                        />
-                        <Text>{Texts.CREATE_DECK}</Text>
-                    </View>
+                    <Icon
+                        name="add"
+                        size={20}
+                        style={styles.createIcon}
+                        color={green}
+                    />
+                    <Text>{Texts.CREATE_DECK}</Text>
 
                 </Btn>
 
@@ -78,9 +77,6 @@ const styles = StyleSheet.create({
     },
     container: {
         marginTop: 20
-    },
-    buttonContent: {
-        flexDirection: 'row',
     },
     center: {
         display: 'flex',

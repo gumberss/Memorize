@@ -6,6 +6,7 @@ import Texts from '../utils/Texts'
 import Btn from '../components/Btn';
 
 import AwesomeAlert from 'react-native-awesome-alerts'
+import Icon from '../utils/Icons';
 
 class SingleDeck extends Component {
 
@@ -43,7 +44,7 @@ class SingleDeck extends Component {
 
     render() {
 
-        const { showAlert } = this.state 
+        const { showAlert } = this.state
         const { deck, cardCount } = this.props
 
         return (
@@ -60,6 +61,12 @@ class SingleDeck extends Component {
                         style={styles.addCardButton}
                         onPress={this.addCard}
                     >
+                        <Icon
+                            name="copy"
+                            size={20}
+                            style={styles.createIcon}
+                            color={blue}
+                        />
                         <Text>{Texts.ADD_CARD}</Text>
                     </Btn>
 
@@ -67,6 +74,12 @@ class SingleDeck extends Component {
                         style={styles.startQuizButton}
                         onPress={this.startQuiz}
                     >
+                        <Icon
+                            name="play"
+                            size={20}
+                            style={styles.createIcon}
+                            color={green}
+                        />
                         <Text>{Texts.START_QUIZ}</Text>
                     </Btn>
                 </View>
@@ -87,18 +100,10 @@ class SingleDeck extends Component {
     }
 }
 
-const mapStateToProps = ({ decks, cards }, { navigation }) => {
-
-    const { deckName } = navigation.state.params
-
-    return {
-        deck: decks[deckName],
-        cardCount: Object.keys(cards)
-            .filter(cardId => cards[cardId].deckName === deckName).length
-    }
-};
-
 const styles = StyleSheet.create({
+    createIcon: {
+        marginRight: 20
+    },
     buttonsContainer: {
         width: '80%',
         alignSelf: 'center'
@@ -127,6 +132,17 @@ const styles = StyleSheet.create({
         color: gray
     }
 })
+
+const mapStateToProps = ({ decks, cards }, { navigation }) => {
+
+    const { deckName } = navigation.state.params
+
+    return {
+        deck: decks[deckName],
+        cardCount: Object.keys(cards)
+            .filter(cardId => cards[cardId].deckName === deckName).length
+    }
+}
 
 export default connect(
     mapStateToProps,
