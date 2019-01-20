@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import Card from '../components/Card';
-import Btn from '../components/Btn';
 import { red, green, blue } from '../utils/colors';
-import Texts from '../utils/Texts';
 import { NavigationActions } from 'react-navigation'
 import { finishQuiz } from '../actions/quiz';
 import { clearLocalNotification, setLocalNotification } from '../components/notification';
-import Icon from '../utils/Icons';
 
 class Quiz extends Component {
 
@@ -19,13 +15,6 @@ class Quiz extends Component {
         correctAnswerCount: 0,
         wrongAnswerCount: 0,
         showFlipCardMessage: true
-    }
-
-    onFlipCard = showAnswer => {
-        this.setState({
-            showButtons: showAnswer,
-            showFlipCardMessage: false
-        })
     }
 
     onCorrect = () => {
@@ -73,6 +62,7 @@ class Quiz extends Component {
                 correctAnswerCount: 0,
                 wrongAnswerCount: 0
             })
+            
         } else {
 
             this.setState(oldState => ({
@@ -108,72 +98,20 @@ class Quiz extends Component {
 
                 <Card
                     id={cardIds[currentCard]}
-                    whenFlip={this.onFlipCard}
                     style={styles.card}
+                    onCorrect={this.onCorrect}
+                    onWrong={this.onWrong}
                 />
-
-                {showFlipCardMessage && (
-                    <Text style={{ alignSelf: 'center' }}>
-                        {Texts.CLICK_IN_CARD_TO_FLIP}
-                    </Text>
-                )}
-                {showButtons && (
-                    <View style={styles.buttonsContainer}>
-                        <Btn
-                            style={[styles.button, styles.correctButton]}
-                            onPress={this.onCorrect}
-                        >
-                            <Icon
-                                name="checkmark"
-                                size={20}
-                                style={styles.icon}
-                                color={green}
-                            />
-
-                            <Text>{Texts.GOT_ANSWER_CORRECT}</Text>
-                        </Btn>
-                        <Btn
-                            style={[styles.button, styles.wrongButton]}
-                            onPress={this.onWrong}
-                        >
-                            <Icon
-                                name="close"
-                                size={20}
-                                style={styles.icon}
-                                color={red}
-                            />
-                            <Text>{Texts.GOT_ANSWER_WRONG}</Text>
-                        </Btn>
-                    </View>)
-                }
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    icon: {
-        marginRight: 20
-    },
     container: {
         marginTop: 20,
         marginLeft: 20,
         marginRight: 20,
-    },
-    buttonsContainer: {
-        flexDirection: 'row',
-        marginTop: 20,
-    },
-    button: {
-        flex: 1
-    },
-    correctButton: {
-        marginRight: 10,
-        borderColor: green
-    },
-    wrongButton: {
-        marginLeft: 10,
-        borderColor: red
     },
     card: {
         borderColor: blue

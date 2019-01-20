@@ -1,12 +1,34 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity, Animated } from 'react-native'
-import { gray, white } from '../utils/colors'
+import { gray, white, green, red } from '../utils/colors'
 import { connect } from 'react-redux'
+import Btn from './Btn';
+import Icon from '../utils/Icons';
+import Texts from '../utils/Texts';
 
 class Card extends Component {
 
     state = {
-        showAnswer: false
+        showAnswer: false,
+        showFlipCardMessage: true
+    }
+
+    onCorrect = () => {
+
+        const { onCorrect } = this.props
+
+        this.onFlip()
+
+        onCorrect && onCorrect()
+    }
+
+    onWrong = () => {
+
+        const { onWrong } = this.props
+
+        this.onFlip()
+
+        onWrong && onWrong()
     }
 
     componentWillMount() {
@@ -27,17 +49,12 @@ class Card extends Component {
             inputRange: [0, 180],
             outputRange: ['0deg', '180deg'],
         })
-
     }
 
     onFlip = () => {
-        const { whenFlip } = this.props
-        const { showAnswer } = this.state
-
-        whenFlip && whenFlip(!showAnswer)
-
         this.setState(oldState => ({
-            showAnswer: !oldState.showAnswer
+            showAnswer: !oldState.showAnswer,
+            showFlipCardMessage: false
         }))
 
         if (this.value >= 90) {
@@ -46,7 +63,7 @@ class Card extends Component {
                 friction: 8,
                 tension: 10
             }).start();
-            
+
         } else {
             Animated.spring(this.animatedValue, {
                 toValue: 180,
@@ -57,13 +74,13 @@ class Card extends Component {
     }
 
     componentWillReceiveProps() {
-        this.onFlip()
+        //        this.onFlip()
     }
 
     render() {
 
         const { card, style, ...props } = this.props
-        const { showAnswer } = this.state
+        const { showAnswer, showFlipCardMessage } = this.state
 
         const frontAnimatedStyle = {
             transform: [
@@ -85,11 +102,66 @@ class Card extends Component {
             >
                 <Animated.Text style={[styles.text, frontAnimatedTextStyle]}>{showAnswer ? card.answer : card.question}</Animated.Text>
             </Animated.View>
+
+            {showFlipCardMessage && (
+                <Text style={{ alignSelf: 'center' }}>
+                    {Texts.CLICK_IN_CARD_TO_FLIP}
+                </Text>
+            )}
+
+            {showAnswer && this.renderButtons()}
         </View>)
     }
+
+    renderButtons = () =>
+        (<View style={styles.buttonsContainer}>
+            <Btn
+                style={[styles.button, styles.correctButton]}
+                onPress={this.onCorrect}
+            >
+                <Icon
+                    name="checkmark"
+                    size={20}
+                    style={styles.icon}
+                    color={green}
+                />
+
+                <Text>{Texts.GOT_ANSWER_CORRECT}</Text>
+            </Btn>
+            <Btn
+                style={[styles.button, styles.wrongButton]}
+                onPress={this.onWrong}
+            >
+                <Icon
+                    name="close"
+                    size={20}
+                    style={styles.icon}
+                    color={red}
+                />
+                <Text>{Texts.GOT_ANSWER_WRONG}</Text>
+            </Btn>
+        </View>)
 }
 
 const styles = StyleSheet.create({
+    icon: {
+        marginRight: 20
+    },
+    buttonsContainer: {
+        flexDirection: 'row',
+        marginTop: 20,
+    },
+    button: {
+        flex: 1
+    },
+    correctButton: {
+        marginRight: 10,
+        borderColor: green
+    },
+    wrongButton: {
+        marginLeft: 10,
+        borderColor: red
+    },
     container: {
         display: 'flex',
         borderColor: gray,
