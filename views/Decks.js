@@ -39,7 +39,7 @@ class Decks extends Component {
   createNewDeckNavigation = () => {
     const { navigate } = this.props.navigation
 
-    return navigate(DeckCreation.route, {})
+    return navigate('DeckCreation', {})
   }
 
   noDecksRegistrered = () => {
