@@ -29,6 +29,15 @@ class DeckCreation extends Component {
         !deckNames.includes(deckName)
             && createDeck(deckName)
             && goBack()
+            && this.resetDeckData()
+    }
+
+    resetDeckData = () => {
+        this.setState({
+            deckName: ''
+        })
+
+        return true
     }
 
     render() {
