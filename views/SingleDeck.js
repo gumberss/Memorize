@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import { gray, green, blue } from '../utils/colors'
 import Texts from '../utils/Texts'
 import Btn from '../components/Btn';

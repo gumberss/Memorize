@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "2-FlashCardinator",
-    "description": "This project is really great.",
-    "slug": "2-FlashCardinator",
+    "name": "Memorize",
+    "description": "This app can help you to optimize your memorize with flashcards and others many things.",
+    "slug": "Memorize",
     "privacy": "public",
     "sdkVersion": "31.0.0",
     "platforms": ["ios", "android"],
