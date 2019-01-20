@@ -4,14 +4,20 @@ export const RECEIVE_DECKS = 'RECEIVE_DECKS'
 export const DELETE_DECK = 'DELETE_DECK'
 
 export function addDeck(deckName) {
-    return {
-        type: ADD_DECK,
-        deck: {
-            [deckName]: {
-                name: deckName
+
+    return dispatch => {
+        dispatch ({
+            type: ADD_DECK,
+            deck: {
+                [deckName]: {
+                    name: deckName
+                }
             }
-        }
+        })
+        
+        return Promise.resolve()
     }
+    
 }
 
 export function deleteDeck(deckName) {

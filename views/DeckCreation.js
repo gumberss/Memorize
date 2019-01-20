@@ -17,7 +17,7 @@ class DeckCreation extends Component {
 
     createDeck = () => {
         const { deckName } = this.state
-        const { createDeck, deckNames, goBack } = this.props
+        const { createDeck, deckNames, goToDeck } = this.props
 
         if (!deckName) {
             this.setState({
@@ -28,8 +28,8 @@ class DeckCreation extends Component {
 
         !deckNames.includes(deckName)
             && createDeck(deckName)
-            && goBack()
-            && this.resetDeckData()
+                .then(() => this.resetDeckData())
+                .then(() => goToDeck(deckName))
     }
 
     resetDeckData = () => {
@@ -112,7 +112,7 @@ const mapStateToProps = ({ decks }) => ({
 
 const mapDispatchToProps = (dispatch, { navigation }) => ({
     createDeck: deckName => dispatch(addDeck(deckName)),
-    goBack: () => navigation.goBack()
+    goToDeck: (deckName) => navigation.navigate('SingleDeck', { deckName })
 
 })
 
