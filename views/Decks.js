@@ -17,7 +17,13 @@ import Deck from '../components/Deck';
 import { retrieveStore } from '../actions/store';
 import { STORE_DATA_KEY } from '../utils/store';
 
+import { AppLoading } from 'expo'
+
 class Decks extends Component {
+
+  state = {
+    loaded: false
+  }
 
   componentDidMount() {
 
@@ -26,6 +32,7 @@ class Decks extends Component {
     AsyncStorage.getItem(STORE_DATA_KEY)
       .then(store => JSON.parse(store))
       .then(store => retrieveStore(store))
+      .then(() => this.setState({ loaded: true }))
 
   }
 
@@ -68,6 +75,11 @@ class Decks extends Component {
   render() {
 
     const { decks } = this.props
+    const { loaded } = this.state
+
+    if (!loaded)
+      return <AppLoading />
+
 
     if (decks === undefined) {
       return <ActivityIndicator style={{ marginTop: 20 }} />
