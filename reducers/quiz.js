@@ -12,10 +12,14 @@ export default function quiz(state = {}, action) {
                 [key]: action.quiz
             }
         case RETRIEVE_STORE:
-            return {
+
+            return action.store ? {
                 ...state,
                 ...action.store.quiz
             }
+                : {
+                    ...state,
+                }
         default:
             return state
     }

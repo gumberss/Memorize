@@ -11,10 +11,13 @@ export default function cards(state = {}, action) {
                 }
             }
         case RETRIEVE_STORE:
-            return {
+            return action.store ? {
                 ...state,
                 ...action.store.cards
             }
+                : {
+                    ...state,
+                }
         default:
             return state
     }

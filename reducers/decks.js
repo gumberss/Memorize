@@ -18,17 +18,20 @@ export default function decks(state = {}, action) {
 
             var newStateItems = Object.keys(state)
                 .filter(key => key !== action.deckName)
-                .reduce((final, current) => ({ ...final, [current]: {...state[current]} }), {})
+                .reduce((final, current) => ({ ...final, [current]: { ...state[current] } }), {})
 
             return {
                 ...newStateItems
             }
         }
         case RETRIEVE_STORE:
-            return {
+            return action.store ? {
                 ...state,
                 ...action.store.decks
             }
+                : {
+                    ...state
+                }
         default:
             return state
     }
