@@ -11,7 +11,7 @@ O objetivo deste projeto é proporcionar ao usuário uma forma mais fácil, simp
 * Checar a porcentagem de acertos;
 * Me divertir.
 
-#Plataformas
+# Plataformas
 * O sistema funciona perfeitamente em Android
 * Não foi possível testar em IOS
 
