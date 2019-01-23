@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import { connect } from 'react-redux';
 import { View, Text, StyleSheet } from 'react-native'
@@ -8,7 +8,7 @@ import Texts from '../utils/Texts';
 import { NavigationActions } from 'react-navigation'
 import Icon from '../utils/Icons';
 
-class QuizResult extends Component {
+class QuizResult extends PureComponent {
 
     backToDeck = () => {
         this.props.navigation.navigate('SingleDeck', {
