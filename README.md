@@ -2,7 +2,7 @@
 Este aplicativo foi desenvolvido como projeto final do módulo de React Native referente ao curso React da udacity.
 
 # Objetivo
-O objetivo deste projeot é proporcionar ao usuário uma forma mais fácil, simples e divertida de estudar utilizando cartões separados por baralho.
+O objetivo deste projeto é proporcionar ao usuário uma forma mais fácil, simples e divertida de estudar utilizando cartões separados por baralho.
 
 # O que posso fazer?
 * Criar um baralho;
@@ -10,6 +10,10 @@ O objetivo deste projeot é proporcionar ao usuário uma forma mais fácil, simp
 * Estudar as cartas adicionadas;
 * Checar a porcentagem de acertos;
 * Me divertir.
+
+#Plataformas
+* O sistema funciona perfeitamente em Android
+* Não foi possível testar em IOS
 
 # Como posso utilizar o projeto?
 
