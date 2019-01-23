@@ -12,8 +12,8 @@ O objetivo deste projeto é proporcionar ao usuário uma forma mais fácil, simp
 * Me divertir.
 
 # Plataformas
-* O sistema funciona perfeitamente em Android
-* Não foi possível testar em IOS
+* O sistema funciona perfeitamente em Android;
+* Não foi possível testar em IOS.
 
 # Como posso utilizar o projeto?
 
